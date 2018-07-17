@@ -1,0 +1,29 @@
+{
+  "name": "apiserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon index.js"
+  },
+  "author": "Tarun Genwa",
+  "license": "ISC",
+  "dependencies": {
+    "await-to-js": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "joi": "^13.4.0",
+    "lodash": "^4.17.10",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.2",
+    "passport": "^0.4.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0"
+  }
+}
