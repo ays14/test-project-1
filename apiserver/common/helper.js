@@ -43,16 +43,50 @@ function findOne(Model, criteria) {
     return query        
 }
 
+/**
+ * Ensure entity exists for given criteria. Return error if no result
+ * @param {Object} Model the model to query 
+ * @param {Object|String|Number} criteria the criteria (if obj) or id (if string/number)
+ * @param {String} errorMessage the error message
+ * @param {Boolean} throwBadRequestIfNotFound throw bad request error if not found
+ */
+async function ensureExist(Model, criteria, errorMessage, throwBadRequestIfNotFound) {
+    const result = await findOne(Model, criteria)
+    if(!result) {
+        const msg = errorMessage || `${Model.username} not found`
+        
+        if(throwBadRequestIfNotFound) {
+            throw new errors.BadRequestError(msg)
+        }
+    throw new errors.NotFoundError(msg)
+    }
+    return result
+}
+
+/**
+ * Ensure entity exists for given criteria. Return error if no result
+ * @param {Object} Model the model to query 
+ * @param {Object|String|Number} criteria the criteria (if obj) or id (if string/number)
+ * @param {String} errorMessage the error message
+ */
+async function ensureNotExist(Model, criteria, errorMessage) {
+    const result = await findOne(Model, criteria)
+    if(result) {
+        const msg = errorMessage || `${Model.name} already exists`
+        throw new errors.ConflictError(msg)
+    }
+}
+
 module.exports = {
     checkPassword,
     hashPassword,
-    findOne
+    findOne,
+    ensureExist,
+    ensureNotExist
 }
 
 /**
   to be defined
-  ensureExist,
-  ensureNotExist,
   findOneAndUpdate,
   findOneAndRemove,
   findAndCountAll

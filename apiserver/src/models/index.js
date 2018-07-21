@@ -5,17 +5,10 @@
 const config = require('../../config')
 const Sequelize = require('sequelize')
 
-const Sequelize = new Sequelize(config.db, config.db_user, config.db_pass, {
+const sequelize = new Sequelize(config.db, config.db_user, config.db_pass, {
     host: 'localhost',
     dialect: 'postgres',
-    operatorsAliases: false,
-  
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    },
+    operatorsAliases: false 
   }
 )
 
@@ -26,7 +19,6 @@ models.User = sequelize.import('./User');
 
 //Define associations
 
+
 module.exports = models;
 
-
-  
