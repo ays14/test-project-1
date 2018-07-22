@@ -1,13 +1,7 @@
-/**
- * Contains all routes
- */
+const UserController = require('../controllers/UserController') 
 
-module.exports = {
+module.exports = (app) => {
+
+    app.post('/login', UserController.create )
 
 }
-
-/**
- * Routes:
- * login - get, post,
- *  
- */

@@ -8,10 +8,6 @@
 
 # Requirements:
 - Nodejs 8+
-- Postgres
+- MSSQL 2017
 - Postman
 
-## Timeline (for one week)
-- Tuesday: Api Server setup with pg database configuration and building the    routes 
-- Wednesday: Getting models and controllers ready with the auth flow           (passport)
-- Thursday: Start with client side 
