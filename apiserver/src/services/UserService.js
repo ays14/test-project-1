@@ -1,50 +1,49 @@
 /**
- * Support helper functions and schema validations later on 
- */
-
-
-/**
  * This service provides operations to manage User. 
  */
-// const Joi = require('joi')
-const _ = require('lodash')
-const { Op } = require('sequelize')
-const helper = require('../../common/helper')
-const { User } = require('../models')
 
+ const { User } = require('../models')
 
-
-// async function create(payload) {
-
-//     const schema = ({
-//         payload: Joi.object().keys({
-//             uid:  Joi.string().max(45).required(),
-//             email: Joi.string().max(100).required(),
-//             username: Joi.string().max(100).required(),
-//             password: Joi.string().max(45).required()
-//         })
-//     })
-
-//     return yield User.create(payload)
-// }
-
-
-
-module.exports = {
-    // create
+/**
+ * 
+ * @param {Object} payload its req.body 
+ */
+async function create(payload) {
+    const user = await User.create({
+        uid: payload.uid, 
+        email: payload.email
+    })
+    return new Promise((resolve, reject) => {
+        if (user) resolve (user)
+        else reject ('no user exists')
+    })
 }
 
-    // validate uid & username to be unique
-    // await helper.ensureNotExist(
-    //     User,
-    //     { where: { uid: payload.uid }, paranoid: false },
-    //     `User already exists with uid=${payload.uid}`
-    // )
-    // await helper.ensureNotExist(
-    //     User,
-    //     { where: { username: payload.username }, paranoid: false },
-    //     `User already exists with uid=${payload.username}`
-    // )
+async function list() {
+    const allUsers = await User.all()
+    return new Promise((resolve,reject)=>{
+        if (allUsers) resolve (allUsers)
+        else reject ('no user exists')
+    })
+}
 
-    //Hash password
-    // payload.password = helper.hashPassword(payload.password)
+/**
+ * 
+ * @param {Object} payload its req.params
+ */
+async function search(payload) {
+    const user = await User.findOne({
+        where: {uid: payload.uid},
+        attributes: ['uid', 'email']
+    })
+    return new Promise((resolve,reject)=>{
+        if (user) resolve (user)
+        else reject ('no user exists')
+    })
+}
+
+module.exports = {
+    create,
+    list,
+    search
+}
