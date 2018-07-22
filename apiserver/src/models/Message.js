@@ -1,8 +1,8 @@
 /**
- * Schema for User.
+ * Schema for Message.
  */
 module.exports = (sequelize, DataTypes) =>
-  sequelize.define('User', {
+  sequelize.define('Message', {
     uid: { type: DataTypes.STRING(45), primaryKey: true },
     email: { type: DataTypes.STRING(245), allowNull: true },
     username: { type: DataTypes.STRING(245), allowNull: true, unique: true },

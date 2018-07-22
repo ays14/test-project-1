@@ -60,7 +60,6 @@ async function ensureExist(Model, criteria, errorMessage, throwBadRequestIfNotFo
         }
     throw new errors.NotFoundError(msg)
     }
-    return result
 }
 
 /**

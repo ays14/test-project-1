@@ -1,13 +1,32 @@
 /**
  * This service provides operations to manage User. 
  */
-const Joi = require('joi')
+// const Joi = require('joi')
 const _ = require('lodash')
 const { Op } = require('sequelize')
 const helper = require('../../common/helper')
 const { User } = require('../models')
 
-async function create(payload) {
+// async function create(payload) {
+
+//     const schema = ({
+//         payload: Joi.object().keys({
+//             uid:  Joi.string().max(45).required(),
+//             email: Joi.string().max(100).required(),
+//             username: Joi.string().max(100).required(),
+//             password: Joi.string().max(45).required()
+//         })
+//     })
+
+//     return yield User.create(payload)
+// }
+
+
+
+module.exports = {
+    // create
+}
+
     // validate uid & username to be unique
     // await helper.ensureNotExist(
     //     User,
@@ -21,19 +40,4 @@ async function create(payload) {
     // )
 
     //Hash password
-    payload.password = helper.hashPassword(payload.password)
-    return await User.create(payload)
-}
-
-// create.schema = {
-//     payload: Joi.object().keys({
-//         uid:  Joi.string().max(45).required(),
-//         email: Joi.string().max(100).required(),
-//         username: Joi.string().max(100).required(),
-//         password: Joi.string().max(45).required()
-//     })
-// }
-
-module.exports = {
-    create
-}
+    // payload.password = helper.hashPassword(payload.password)
