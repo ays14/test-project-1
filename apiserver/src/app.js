@@ -23,11 +23,11 @@ const UserController = require('./controllers/UserController')
 app.post('/login', UserController.create )
 
 
-// app.use((req,res,next)=>{
-//     res.status(404).json({
-//         code: 404,
-//         message: 'Page not found'
-//     })
-// })
+app.use((req,res,next)=>{
+    res.status(404).json({
+        code: 404,
+        message: 'Page not found'
+    })
+})
 
 module.exports = app

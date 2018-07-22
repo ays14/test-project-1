@@ -1,4 +1,9 @@
 /**
+ * Support helper functions and schema validations later on 
+ */
+
+
+/**
  * This service provides operations to manage User. 
  */
 // const Joi = require('joi')
@@ -6,6 +11,8 @@ const _ = require('lodash')
 const { Op } = require('sequelize')
 const helper = require('../../common/helper')
 const { User } = require('../models')
+
+
 
 // async function create(payload) {
 

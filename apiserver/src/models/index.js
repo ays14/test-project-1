@@ -18,7 +18,7 @@ const models = { sequelize };
 models.User = sequelize.import('./User')
 models.Message = sequelize.import('./Message')
 models.MessageRecipent = sequelize.import('./MessageRecipent')
-sequelize.sync()
+sequelize.sync({force:true})
 
 //Define associations
 
