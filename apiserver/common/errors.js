@@ -1,5 +1,5 @@
 /**
- * This module defines application errors.
+ * This module defines application http errors.
  */
 
 const util = require('util')

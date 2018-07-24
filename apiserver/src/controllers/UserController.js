@@ -3,13 +3,17 @@
  */
 const { User } = require('../models')
 const service = require('../services/UserService')
+const { to, TE} = require('../../common/helper')
+
 /**
  * Create a new user
  * @param req the request
  * @param res the response
  */
 async function create(req,res) {
-    const user = await service.create(req.body)
+    let err, user
+    [err, user] = await to(service.create(req.body))
+    if(err) TE(err.message)
     if(res.status(201)){ 
         res.send(user)}
 }
@@ -20,7 +24,9 @@ async function create(req,res) {
  * @param res the response
  */
 async function list(req,res) {
-    const allUsers = await service.list()
+    let err, allUsers
+    [err, allUsers] = await to(service.list()) 
+    if(err) TE(err.message)
     if(res.status(200)) {
         res.send(allUsers)
     }

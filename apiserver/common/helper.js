@@ -6,6 +6,24 @@ const _ = require('lodash')
 const errors = require('./errors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt-nodejs')
+const pe = require('parse-error')
+
+/**
+ * @param {Promise} promise  
+ */
+function to(promise) {
+    return promise.then(data => {
+        return [null, data]
+    }).catch(err=>
+        [pe(err)]
+    )
+}
+
+
+function TE(err_message, log){ 
+    throw new Error(err_message);
+}
+
 
 /**
  * Check if a password is correct or not against a hashed value.
@@ -77,6 +95,8 @@ async function ensureNotExist(Model, criteria, errorMessage) {
 }
 
 module.exports = {
+    to,
+    TE,
     checkPassword,
     hashPassword,
     findOne,

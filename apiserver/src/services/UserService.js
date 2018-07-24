@@ -3,27 +3,30 @@
  */
 
  const { User } = require('../models')
+ const { to, TE} = require('../../common/helper')
 
 /**
  * 
  * @param {Object} payload its req.body 
  */
 async function create(payload) {
-    const user = await User.create({
+    let err, user
+    [err, user] = await to(User.create({
         uid: payload.uid, 
         email: payload.email
-    })
+    }))
     return new Promise((resolve, reject) => {
-        if (user) resolve (user)
-        else reject ('no user exists')
+        if (err) reject(TE(err.message))
+        else resolve (user)
     })
 }
 
 async function list() {
-    const allUsers = await User.all()
+    let err, allUsers
+    [err, allUsers] = await to(User.all()) 
     return new Promise((resolve,reject)=>{
-        if (allUsers) resolve (allUsers)
-        else reject ('no user exists')
+        if (err) reject('no user exists')
+        else resolve (allUsers)
     })
 }
 
