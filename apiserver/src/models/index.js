@@ -5,12 +5,9 @@
 const config = require('../../config')
 const Sequelize = require('sequelize')
 
-
-const sequelize = new Sequelize(config.dbUrl, {
-  logging: false,
-  operatorsAliases: false,
-  dialectOptions: { encrypt: true }
-});
+const sequelize = new Sequelize(config.db, config.username, config.password, {
+  dialect: 'postgres'
+})
 
 const models = { sequelize };
 

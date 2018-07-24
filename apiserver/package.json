@@ -20,9 +20,10 @@
     "nodemon": "^1.18.2",
     "parse-error": "^0.2.0",
     "passport": "^0.4.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.0",
-    "socket.io": "^2.1.1",
-    "tedious": "^2.6.3"
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

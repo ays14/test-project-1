@@ -1,7 +1,6 @@
 /**
  * This service provides operations to manage User. 
  */
-
  const { User } = require('../models')
  const { to, TE} = require('../../common/helper')
 
