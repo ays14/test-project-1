@@ -11,7 +11,12 @@
 async function create(payload) {
     let err, user
     [err, user] = await to(User.create({
-        uid: payload.uid, 
+        id: payload.id,
+        firstname: payload.firstname,
+        lastname: payload.lastname,
+        username: payload.username,
+        password: payload.password,
+        age: payload.age, 
         email: payload.email
     }))
     return new Promise((resolve, reject) => {
@@ -35,8 +40,8 @@ async function list() {
  */
 async function search(payload) {
     const user = await User.findOne({
-        where: {uid: payload.uid},
-        attributes: ['uid', 'email']
+        where: {id: payload.id},
+        attributes: ['id', 'firstname', 'age']
     })
     return new Promise((resolve,reject)=>{
         if (user) resolve (user)

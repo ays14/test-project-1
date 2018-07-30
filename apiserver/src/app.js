@@ -11,12 +11,20 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const _ = require('lodash')
-
+const expressGrapqhQL = require('express-graphql')
+const schema = require('./graphql')
 const app = express()
 const routeHandlers = require('./routes')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('tiny'))
+
+
+app.use('/graphql', expressGrapqhQL({
+    schema,
+    graphiql: true
+}))
 
 routeHandlers(app)
 
