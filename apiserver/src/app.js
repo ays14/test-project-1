@@ -2,29 +2,31 @@
     Express configuration
 */
 
-
 if(!process.env.NODE_ENV) {
     process.env.NODE_ENV = "development"
 }
 
 const express = require('express')
+const _ = require('lodash')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const _ = require('lodash')
 const expressGrapqhQL = require('express-graphql')
 const schema = require('./graphql')
-const app = express()
 const routeHandlers = require('./routes')
+const passport = require('passport')
+const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('tiny'))
 
+app.use(passport.initialize())
 
 app.use('/graphql', expressGrapqhQL({
     schema,
     graphiql: true
 }))
+
 
 routeHandlers(app)
 

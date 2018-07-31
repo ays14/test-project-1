@@ -3,7 +3,7 @@
  */
  const { User } = require('../models')
  const { to, TE} = require('../../common/helper')
-
+ const _ = require('lodash')
 /**
  * 
  * @param {Object} payload its req.body 
@@ -21,7 +21,7 @@ async function create(payload) {
     }))
     return new Promise((resolve, reject) => {
         if (err) reject(TE(err.message))
-        else resolve (user)
+        else resolve (user)//_.omit(user.dataValues,'password'))
     })
 }
 

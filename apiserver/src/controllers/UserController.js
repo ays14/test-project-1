@@ -4,7 +4,7 @@
 const { User } = require('../models')
 const service = require('../services/UserService')
 const { to, TE} = require('../../common/helper')
-
+const _ = require('lodash')
 /**
  * Create a new user
  * @param req the request
@@ -44,8 +44,27 @@ async function search(req,res) {
         res.send(user)
     }
 }
+
+/**
+ * 
+ * @param req the request 
+ * @param res the response
+ */
+async function update(req,res) {
+}
+/**
+ * 
+ * @param req the request 
+ * @param res the response
+ */
+async function remove(req,res) {
+
+}
+
 module.exports = {
     create,
     list,
-    search
+    search,
+    update,
+    remove
 }
