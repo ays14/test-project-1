@@ -5,10 +5,13 @@
 const bcrypt = require('bcrypt') 
 const { to, TE } = require('../../common/helper')
 const jwt = require('jsonwebtoken')
-
+const config = require('../../config')
 module.exports = (sequelize, DataTypes) =>{
   const User = sequelize.define('User', {
-    id: { type: DataTypes.STRING(45), primaryKey: true },
+    id: {
+       type: DataTypes.UUID,
+       defaultValue: DataTypes.UUIDV4 ,       
+       primaryKey: true },
     email: { type: DataTypes.STRING(245), allowNull: true },
     username: { type: DataTypes.STRING(245), allowNull: true },
     firstname: { type: DataTypes.STRING(245), allowNull: true },
@@ -27,7 +30,7 @@ module.exports = (sequelize, DataTypes) =>{
     [errr, hash] = await to(bcrypt.hash(user.password, salt))
     if(err) TE(err.message)
     user.password = hash
-    console.log(user.dataValues)
+//    console.log(user.dataValues)
   }) 
 
 // Sequelize Instance methods (have access to user model via this object)
@@ -39,8 +42,8 @@ module.exports = (sequelize, DataTypes) =>{
       return this 
       }
 
-    User.prototype.tokenize = async function (){
-      return jwt.sign({id: this.id})
+    User.prototype.tokenize = function (){
+      return jwt.sign({id: this.id}, config.secret)
     }
 
   return User

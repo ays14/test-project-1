@@ -21,11 +21,11 @@ async function create(payload) {
     }))
     return new Promise((resolve, reject) => {
         if (err) reject(TE(err.message))
-        else resolve (user)//_.omit(user.dataValues,'password'))
+        else resolve (user_.omit(user.dataValues,'password'))
     })
 }
 
-async function list() {
+async function getAllUsers() {
     let err, allUsers
     [err, allUsers] = await to(User.all()) 
     return new Promise((resolve,reject)=>{
@@ -38,7 +38,7 @@ async function list() {
  * 
  * @param {Object} payload its req.params
  */
-async function search(payload) {
+async function getById(payload) {
     const user = await User.findOne({
         where: {id: payload.id},
         attributes: ['id', 'firstname', 'age']
@@ -49,8 +49,10 @@ async function search(payload) {
     })
 }
 
+
+
 module.exports = {
     create,
-    list,
-    search
+    getAllUsers,
+    getById
 }

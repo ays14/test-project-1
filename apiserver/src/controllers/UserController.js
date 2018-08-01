@@ -23,9 +23,9 @@ async function create(req,res) {
  * @param req the request  
  * @param res the response
  */
-async function list(req,res) {
+async function getAllUsers(req,res) {
     let err, allUsers
-    [err, allUsers] = await to(service.list()) 
+    [err, allUsers] = await to(service.getAllUsers()) 
     if(err) TE(err.message)
     if(res.status(200)) {
         res.send(allUsers)
@@ -37,10 +37,10 @@ async function list(req,res) {
  * @param req the request 
  * @param res the response
  */
-async function search(req,res) {
-    console.log(req.params)
-    const user = await service.search(req.params)
+async function getById(req,res) {
+    const user = await service.getById(req.params)
     if(res.status(200)) {
+        let err, token
         res.send(user)
     }
 }
@@ -51,6 +51,28 @@ async function search(req,res) {
  * @param res the response
  */
 async function update(req,res) {
+    // let user = req.user
+    // let data = req.body
+    // user.set(data)
+    // [err, user] = await to(user.save())
+
+}
+
+/**
+ * 
+ * @param req the request 
+ * @param res the response
+ */
+async function login(req,res) { //getToken
+    if  (!req.body.id || !req.body.password ) {
+        TE('fields not sent')
+    }
+    let err, user
+    [err, user] = await to(User.findOne({where: {id: req.body.id}}))
+    let token 
+    token = "Bearer " + user.tokenize()
+    console.log (user.tokenize())
+    res.send(token)
 }
 /**
  * 
@@ -58,13 +80,17 @@ async function update(req,res) {
  * @param res the response
  */
 async function remove(req,res) {
+    let err, user
+    [err, user] = await to(User.destroy({ where: {id: req.body.id}})) ///doesnt make much sense to store user it's returning 1
 
+    res.send({'user deleted':user })
 }
 
 module.exports = {
     create,
-    list,
-    search,
+    login,
+    getAllUsers,
+    getById,
     update,
     remove
 }

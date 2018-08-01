@@ -15,11 +15,12 @@ const schema = require('./graphql')
 const routeHandlers = require('./routes')
 const passport = require('passport')
 const app = express()
+const cors = require('cors')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('tiny'))
-
+app.use(cors())
 app.use(passport.initialize())
 
 app.use('/graphql', expressGrapqhQL({
