@@ -1,28 +1,23 @@
-const graphql = require('graphql')
-const { GraphQLObjectType, GraphQLInt,
-         GraphQLString, GraphQLSchema } = graphql
-const { resolver } = require('graphql-sequelize')
-
-const { User } = require('../models')
-const UserType = new GraphQLObjectType({
-    name: 'User',
-    fields: {
-        id: { type: GraphQLString },
-        firstname: { type: GraphQLString },
-        age: { type: GraphQLInt }
-    }
-})
-const RootQuery = new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-        user: {
-            type: UserType,
-            args: { id: { type: GraphQLString } },
-            resolve: resolver(User)
-        }
-    }
-})
+const { GraphQLObjectType,
+        GraphQLSchema } = require('graphql');
+const { RootQuery } = require('./queries')
+const { RootMutation } = require('./mutations')
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: RootMutation
 })
+// const queries = require('./queries')
+// const mutations = require('./mutations')
+  
+// module.exports = new GraphQLSchema({
+//     query: new GraphQLObjectType({
+//       name: 'RootQuery',
+//       fields: () => queries
+//     }),
+//     mutation: new GraphQLObjectType({
+//       name: 'RootMutation',
+//       fields: () => mutations
+//     })
+// });
+
