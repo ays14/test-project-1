@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo' 
 import Routes from './routes'
+import 'semantic-ui-css/semantic.min.css';
 //import configureStore from './store'
 // import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 // import thunkMiddleware from 'redux-thunk'
