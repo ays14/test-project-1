@@ -1,7 +1,10 @@
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 
-const rootReducer = combineReducers({
-//reducers goes here key: val form
-})
 
-export default rootReducer
+
+// const rootReducer = (client) => combineReducers({
+// // all the reducers go here
+//     apollo: client.reducer()
+// })
+
+// export default rootReducer
