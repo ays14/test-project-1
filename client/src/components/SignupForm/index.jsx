@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Button, Header, Icon } from 'semantic-ui-react'
+import { Form, Button, Header, Icon, Message } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import './style.css'
 class SignupForm extends React.Component {
     render() {
@@ -39,6 +40,10 @@ class SignupForm extends React.Component {
                 <input placeholder='password' type="password" />
                 </Form.Field>
                 <Button primary fluid >SignUp</Button>
+                <Message color="grey">
+                    Already Registered ->> <Link to="/login"> <Button color="black"> Login </Button></Link>
+                </Message>
+
             </Form>
             </div>
             </div>

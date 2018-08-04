@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Button, Checkbox, Header, Icon } from 'semantic-ui-react'
+import { Form, Message, Button, Checkbox, Header, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import './style.css'
 class Login extends React.Component {
 
@@ -24,7 +25,12 @@ class Login extends React.Component {
                 <Form.Field>
                 <Checkbox label='Remember Me' />
                 </Form.Field>
+                <Link to="/">
                 <Button primary fluid  >Login</Button>
+                </Link>
+                <Message color="grey">
+                    New to us ->> <Link to="/signup"> <Button color="black"  > Sign Up </Button></Link>
+                </Message>
             </Form>
             </div>
             </div>
