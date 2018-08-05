@@ -11,10 +11,10 @@ export default class AppBar extends Component {
         <Menu secondary>
          {/* <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} /> */}
         <Menu.Item>
-        <Icon name='comments outline' circular />
+        <Icon name='comments outline' circular size="large" />
         </Menu.Item>
         <Menu.Item>
-        <Header> GraphQL Messanger </Header>
+        <Header> GraphQL Messenger </Header>
         </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>

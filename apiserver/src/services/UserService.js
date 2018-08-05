@@ -16,12 +16,11 @@ async function create(payload) {
         lastname: payload.lastname,
         username: payload.username,
         password: payload.password,
-        age: payload.age, 
         email: payload.email
     }))
     return new Promise((resolve, reject) => {
         if (err) reject(TE(err.message))
-        else resolve (user_.omit(user.dataValues,'password'))
+        else resolve (user)//_.omit(user.dataValues,'password'))
     })
 }
 
@@ -49,10 +48,35 @@ async function getById(payload) {
     })
 }
 
+async function login(email, password) {
+    console.log(email,password)
+    if  (!email || !password ) {
+        TE('fields not sent')
+    }
+    let err, user
+    [err, user] = await to(User.findOne({where: {email: email}}))
+    let pass
+    pass = await user.checkPassword(password)
+    let token 
+    if ( pass ){
+        
+        token = "Bearer " + user.tokenize()    
+    }
+    // console.log(token)
+    // if (!pass) return 'err'
+    return new Promise ( (resolve,reject)=> {
+//        if(!pass) reject('password doesnnot match')
+        if(token)
+        resolve (token)
+        else reject('err')
+    })
+}
+
 
 
 module.exports = {
     create,
     getAllUsers,
-    getById
+    getById,
+    login
 }

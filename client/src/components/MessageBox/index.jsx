@@ -17,6 +17,26 @@ const Messages = () => {
         Duis aute irure dolor in reprehenderit"
         </p>
         </Segment>
+        <div style={{padding:'20px'}}></div>
+        <Segment floated="left">
+        <p>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+        </p>
+        </Segment>
+        <div style={{padding:'20px'}}></div>
+        <Segment floated="right" inverted color="grey">
+        <p>
+        "Lex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit"
+        </p>
+        </Segment>
+        <div style={{padding:'40px'}}></div>
+        <Segment floated="right" inverted color="grey">
+        <p>
+        "Lex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit"
+        </p>
+        </Segment>
 
     </div>
     )

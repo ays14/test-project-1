@@ -18,10 +18,10 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         user: {
             type: UserType,
-            args: { id: { type: GraphQLString } },
+            args: { username: { type: GraphQLString } },
             resolve: resolver(User)
         }
-   }
+   } 
 })
 
 module.exports = { RootQuery }

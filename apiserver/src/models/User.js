@@ -12,12 +12,11 @@ module.exports = (sequelize, DataTypes) =>{
        type: DataTypes.UUID,
        defaultValue: DataTypes.UUIDV4 ,       
        primaryKey: true },
-    email: { type: DataTypes.STRING(245), allowNull: true },
-    username: { type: DataTypes.STRING(245), allowNull: true },
-    firstname: { type: DataTypes.STRING(245), allowNull: true },
-    lastname: { type: DataTypes.STRING(245), allowNull: true },
+    email: { type: DataTypes.STRING(245), allowNull: false, unique: 'compositeIndex'  },
+    username: { type: DataTypes.STRING(245), allowNull: false, unique: 'compositeIndex'  },
+    firstname: { type: DataTypes.STRING(245), allowNull: false },
+    lastname: { type: DataTypes.STRING(245), allowNull: false },
     password: { type: DataTypes.STRING(1024), allowNull: true }, 
-    age: { type: DataTypes.INTEGER, allowNull: true }
   })
 
 // Sequelize hooks 
@@ -36,7 +35,7 @@ module.exports = (sequelize, DataTypes) =>{
 // Sequelize Instance methods (have access to user model via this object)
     User.prototype.checkPassword = async function (pwd) {
       let err, pass 
-      [err, pass] = await to(bcrypt.compare(this.password, pwd))
+      [err, pass] = await to(bcrypt.compare(pwd, this.password))
       if (err) TE(err)
       console.log(pass)
       return this 
@@ -46,6 +45,7 @@ module.exports = (sequelize, DataTypes) =>{
       return jwt.sign({id: this.id}, config.secret)
     }
 
+   
   return User
 }
 

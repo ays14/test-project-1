@@ -10,7 +10,7 @@ const express = require('express')
 const _ = require('lodash')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const expressGrapqhQL = require('express-graphql')
+const GraphQLHttp  = require('express-graphql')
 const schema = require('./graphql')
 const routeHandlers = require('./routes')
 const passport = require('passport')
@@ -23,10 +23,14 @@ app.use(morgan('tiny'))
 app.use(cors())
 app.use(passport.initialize())
 
-app.use('/graphql', expressGrapqhQL({
+app.use('/graphql', GraphQLHttp((request, response, graphQLParmas)=>({
     schema,
+    context: {
+        request: request
+    },
     graphiql: true
 }))
+)
 
 
 routeHandlers(app)

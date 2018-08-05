@@ -3,6 +3,22 @@ import { Form, Message, Button, Checkbox, Header, Icon } from 'semantic-ui-react
 import { Link } from 'react-router-dom'
 import './style.css'
 class Login extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            email: '', password: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange(event) {
+        let name, value
+        name = event.target.name 
+        value = event.target.value
+        this.setState({
+            [name]: value
+        })
+        console.log(this.state)
+    }
 
     render() {
         return (
@@ -12,15 +28,14 @@ class Login extends React.Component {
                 <Icon name='comments outline' circular />
                 <Header.Content>Graphql Messenger</Header.Content>
             </Header>
-   
             <Form >
                 <Form.Field >
                 <label>Email </label>
-                <input placeholder='someone@example.com' />
+                <input placeholder='someone@example.com' name="email" value={this.state.email} onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>
                 <label>Password</label>
-                <input placeholder='password' type="password" />
+                <input placeholder='password' type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                 </Form.Field>
                 <Form.Field>
                 <Checkbox label='Remember Me' />

@@ -63,17 +63,20 @@ async function update(req,res) {
  * @param req the request 
  * @param res the response
  */
-async function login(req,res) { //getToken
-    if  (!req.body.id || !req.body.password ) {
+async function login(req,res) { //getToken 
+    // add password checking or comparison
+    if  (!req.body.email || !req.body.password ) {
         TE('fields not sent')
     }
     let err, user
-    [err, user] = await to(User.findOne({where: {id: req.body.id}}))
+    [err, user] = await to(User.findOne({where: {email: req.body.email}}))
     let token 
     token = "Bearer " + user.tokenize()
     console.log (user.tokenize())
     res.send(token)
 }
+
+
 /**
  * 
  * @param req the request 

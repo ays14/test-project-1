@@ -10,11 +10,12 @@ const opts = {
 
 const strategy = new Strategy(opts, async (payload, done)=>{
     let err, user 
-    [ err, user ] = await to(User.findById(payload.id))
+    [ err, user ] = await to(User.findOne( { where: {email: payload.email } } ) )
     if (err) return done(err, false)
     if (user) return done(null, user)
     else return done(null, false)
-})
+}
+)
 
 
 module.exports = (passport)=> {
