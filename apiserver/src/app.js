@@ -12,7 +12,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const GraphQLHttp  = require('express-graphql')
 const schema = require('./graphql')
-const routeHandlers = require('./routes')
+// const routeHandlers = require('./routes')
 const passport = require('passport')
 const app = express()
 const cors = require('cors')
@@ -33,7 +33,7 @@ app.use('/graphql', GraphQLHttp((request, response, graphQLParmas)=>({
 )
 
 
-routeHandlers(app)
+// routeHandlers(app)
 
 app.use((req,res,next)=>{
     res.status(404).json({

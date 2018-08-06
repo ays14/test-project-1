@@ -3,3 +3,5 @@ node_modules
 package-lock.json
 apiserver/common/helper.js
 .vscode
+apiserver/src/passport
+apiserver/src/routes
