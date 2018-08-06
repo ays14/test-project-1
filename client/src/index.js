@@ -10,8 +10,11 @@ import 'semantic-ui-css/semantic.min.css';
 //import configureStore from './store'
 // import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 // import thunkMiddleware from 'redux-thunk'
-// import { HttpLink } from 'apollo-link-http'
-// const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' })
+
+// import ApolloClient from 'apollo-boost'
+// const client = new ApolloClient({
+//     uri: 'http://localhost:5000/graphql'
+// })
 
 const httpLink = new HttpLink({
     uri: "http://localhost:5000/graphql"

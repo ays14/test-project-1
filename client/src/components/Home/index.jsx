@@ -3,8 +3,10 @@ import UserList from '../UserList'
 import MessageBox from '../MessageBox'
 import { Grid } from 'semantic-ui-react'
 import Header from '../Header'
-
-const Home = () => {
+import { graphql } from 'react-apollo'
+import query from '../../queries/loginQuery'
+const Home = (props) => {
+    console.log(props)
     return(
         <div>
         <Header/>
@@ -20,4 +22,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default graphql(query)(Home)

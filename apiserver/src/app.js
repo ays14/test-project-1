@@ -25,9 +25,9 @@ app.use(passport.initialize())
 
 app.use('/graphql', GraphQLHttp((request, response, graphQLParmas)=>({
     schema,
-    context: {
-        request: request
-    },
+    // context: {
+    //     request: request
+    // },
     graphiql: true
 }))
 )

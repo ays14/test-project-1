@@ -65,6 +65,7 @@ const RootMutation = new GraphQLObjectType({
                 let err, token 
                 [err, token] = await to(UserService.login(email, password))
                 console.log ( token )
+                console.log('request : ',request.headers)
                 return token
             }
         }

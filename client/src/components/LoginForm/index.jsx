@@ -1,7 +1,10 @@
 import React from 'react'
 import { Form, Message, Button, Checkbox, Header, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { graphql } from 'react-apollo'
 import './style.css'
+import loginMutation from '../../queries/loginMutation'
+
 class Login extends React.Component {
     constructor(props){
         super(props)
@@ -9,6 +12,7 @@ class Login extends React.Component {
             email: '', password: ''
         }
         this.handleChange = this.handleChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
     handleChange(event) {
         let name, value
@@ -17,10 +21,22 @@ class Login extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
+        // console.log(this.state)
+    }
+
+    onSubmit(event) {
+        let email, password
+        email = this.state.email
+        password = this.state.password
+        event.preventDefault()
+        console.log({email, password })
+        this.props.mutate({
+            variables: {email, password}
+        })
     }
 
     render() {
+        // console.log(this.props)
         return (
             <div className="container">
             <div className="content">
@@ -40,9 +56,9 @@ class Login extends React.Component {
                 <Form.Field>
                 <Checkbox label='Remember Me' />
                 </Form.Field>
-                <Link to="/">
-                <Button primary fluid  >Login</Button>
-                </Link>
+                {/* <Link to="/"> */}
+                <Button primary fluid onClick={this.onSubmit} >Login</Button>
+                {/* </Link> */}
                 <Message color="grey">
                     New to us ->> <Link to="/signup"> <Button color="black"  > Sign Up </Button></Link>
                 </Message>
@@ -53,6 +69,6 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default graphql(loginMutation)(Login)
 
 

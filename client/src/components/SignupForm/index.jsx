@@ -2,7 +2,19 @@ import React from 'react'
 import { Form, Button, Header, Icon, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './style.css'
+import { graphql } from 'react-apollo'
+import signupMutation from '../../queries/signupMutation';
 class SignupForm extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={}
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+    onSubmit() {
+        console.log(this.props)
+        this.props.mutate()
+    }
+
     render() {
         return (
             <div className="container">
@@ -39,7 +51,7 @@ class SignupForm extends React.Component {
                 <label>Confirm Password</label>
                 <input placeholder='password' type="password" />
                 </Form.Field>
-                <Button primary fluid >SignUp</Button>
+                <Button primary fluid onClick={this.onSubmit}>SignUp</Button>
                 <Message color="grey">
                     Already Registered ->> <Link to="/login"> <Button color="black"> Login </Button></Link>
                 </Message>
@@ -51,6 +63,6 @@ class SignupForm extends React.Component {
     }
 }
 
-export default SignupForm
+export default graphql(signupMutation)(SignupForm)
 
 
