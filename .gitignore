@@ -1,7 +1,0 @@
-node_modules
-.env
-package-lock.json
-apiserver/common/helper.js
-.vscode
-apiserver/src/passport
-apiserver/src/routes

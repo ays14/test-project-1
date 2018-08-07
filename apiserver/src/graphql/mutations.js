@@ -55,18 +55,27 @@ const RootMutation = new GraphQLObjectType({
             }
         },
         login: {
-            type: UserType,
+            type: GraphQLString,
             args: {
                 email: { type: new GraphQLNonNull(GraphQLString)},
                 password: { type: new GraphQLNonNull(GraphQLString)}
             },
-            resolve: async function(root, {email, password}, request, context) {
-               
+            resolve: async function (root, { email, password }, request, context ){
                 let err, token 
-                [err, token] = await to(UserService.login(email, password))
-                console.log ( token )
-                console.log('request : ',request.headers)
+                [err, token] = await to (UserService.login(email, password)) 
+                console.log('token: ' + token)
                 return token
+            } 
+        },
+
+        resolveUser: {
+            type: UserType,
+            args:{
+                email: { type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve: async function (root, email, context){
+                console.log(context.user)
+                return User.findById(context.user.id)
             }
         }
     }
