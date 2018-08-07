@@ -29,7 +29,7 @@ const RootMutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
         addUser: {
-            type: UserType,
+            type: GraphQLString,
             args: {
                 firstname: {type: new GraphQLNonNull(GraphQLString)},
                 lastname: { type: new GraphQLNonNull(GraphQLString)},
@@ -42,6 +42,8 @@ const RootMutation = new GraphQLObjectType({
                 let err, user
                 [err, user] = await to(UserService.create({firstname, lastname, username, email, password}))
                 if (err) TE('user not created')
+                let token
+                token = "Bearer " + user.tokenize()
                 // console.log(user)
                 // return await (resolver(User,{
                 //     before: ()=>{
@@ -51,7 +53,7 @@ const RootMutation = new GraphQLObjectType({
 
                 //     }
                 // }))  ///how to use to helper functionality ???
-                return user
+                return token 
             }
         },
         login: {
@@ -68,13 +70,14 @@ const RootMutation = new GraphQLObjectType({
             } 
         },
 
-        resolveUser: {
+        getCurrentUser: {
             type: UserType,
             args:{
-                email: { type: new GraphQLNonNull(GraphQLString)}
+                dummyArg: { type: GraphQLString}
             },
-            resolve: async function (root, email, context){
+            resolve: async function (root, token, context){
                 console.log(context.user)
+                console.log(token)
                 return User.findById(context.user.id)
             }
         }

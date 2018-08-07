@@ -9,7 +9,7 @@ class Login extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            email: '', password: ''
+            email: '', password: '', px:''
         }
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -24,19 +24,22 @@ class Login extends React.Component {
         // console.log(this.state)
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         let email, password
         email = this.state.email
         password = this.state.password
         event.preventDefault()
         console.log({email, password })
-        this.props.mutate({
+        let pop 
+        pop = await this.props.mutate({
             variables: {email, password}
         })
+        this.setState({ px: pop.data.login})
+        localStorage.setItem("token", this.state.px )
+        this.props.history.push('/')
     }
 
     render() {
-        // console.log(this.props)
         return (
             <div className="container">
             <div className="content">

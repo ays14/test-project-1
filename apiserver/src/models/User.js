@@ -37,7 +37,9 @@ module.exports = (sequelize, DataTypes) =>{
       let err, pass 
       [err, pass] = await to(bcrypt.compare(pwd, this.password))
       if (err) TE(err)
-      console.log(pass)
+      if (pass === false)
+      TE('password is wrong')
+      console.log( 'passwordmatched:',pass)
       return this 
       }
 

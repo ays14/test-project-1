@@ -3,6 +3,14 @@ import { Menu, Segment, Button, Icon, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 export default class AppBar extends Component {
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    localStorage.removeItem('token')
+  }
 
   render() {
 
@@ -19,7 +27,7 @@ export default class AppBar extends Component {
           <Menu.Menu position="right">
             <Menu.Item>
               <Link to="/login">
-              <Button primary>Logout</Button>
+              <Button primary onClick={this.handleClick}>Logout</Button>
               </Link>
             </Menu.Item>
           </Menu.Menu>

@@ -1,11 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation {
-    addUser(firstname:"tarun", lastname:"genwa",
-                      username:"THIKii", email:"tgenwa@iitig.ac.in",password:"tarungenwa"  
-    ){
-      firstname, id
-    }
+mutation SignUp($firstname: String!, $lastname: String!, $username:String!, $email: String!, $password:String!){
+    addUser(firstname:$firstname, lastname:$lastname, username:$username, email:$email ,password:$password  
+    )
   }
 `
