@@ -35,11 +35,15 @@ class Login extends React.Component {
             variables: {email, password}
         })
         this.setState({ px: pop.data.login})
-        console.log(this.state)
+        // console.log(this.state)
         localStorage.setItem("token", this.state.px )
         if(this.state.px !== null){
             this.props.history.push('/')
         }
+    }
+
+    componentWillMount(){
+        localStorage.removeItem('token')
     }
 
     render() {

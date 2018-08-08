@@ -13,7 +13,7 @@ export default class AppBar extends Component {
   }
 
   render() {
-
+    const user = this.props.user 
     return (
       <Segment >
         <Menu secondary>
@@ -22,7 +22,7 @@ export default class AppBar extends Component {
         <Icon name='comments outline' circular size="large" />
         </Menu.Item>
         <Menu.Item>
-        <Header> GraphQL Messenger </Header>
+        <Header> GraphQL Messenger {user}  </Header>
         </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>
