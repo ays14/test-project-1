@@ -22,15 +22,8 @@ const httpLink = new HttpLink({
 const cache = new InMemoryCache()
 
 const authMiddleware = new ApolloLink((operation,forward)=>{
-    let token=''
-    if (localStorage.getItem('token')!==null){
-        token = localStorage.getItem('token')
-    }
-//     if (localStorage.key('token')){
-//         token = localStorage.getItem('token')
-//    }
-   operation.setContext({
-        headers: { authorization: `${token}`
+    operation.setContext({
+        headers: { authorization: localStorage.getItem('token') ? localStorage.getItem('token') : ''
         }   
     })
     return forward(operation)
@@ -39,19 +32,6 @@ const client = new ApolloClient({
     link: concat(authMiddleware, httpLink),
     cache
 })
-
-// const reducers = combineReducers({
-//     apollo: client.reducer()
-// })
-
-// const store = createStore({
-//     reducers,
-//     {}, //initial state,
-//     compose(
-//         applyMiddleware(client.middlware()),
-//         (typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined') ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
-//     )
-// })
 
 const AppContainer = function () {
     return(

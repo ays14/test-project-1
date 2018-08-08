@@ -29,14 +29,17 @@ class Login extends React.Component {
         email = this.state.email
         password = this.state.password
         event.preventDefault()
-        console.log({email, password })
+        // console.log({email, password })
         let pop 
         pop = await this.props.mutate({
             variables: {email, password}
         })
         this.setState({ px: pop.data.login})
+        console.log(this.state)
         localStorage.setItem("token", this.state.px )
-        this.props.history.push('/')
+        if(this.state.px !== null){
+            this.props.history.push('/')
+        }
     }
 
     render() {

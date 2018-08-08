@@ -7,12 +7,12 @@ import { graphql } from 'react-apollo'
 import query from '../../queries/getCurrentUser'
 
 class Home extends React.Component{
-    async componentWillMount(){
-        let mut 
-        mut = await this.props.mutate()
-        console.log('mut:' ,mut)
+    // constructor(props){
+    //     super(props)
+    // }
+    componentDidMount(){
+        console.log(this.props)  
     }
-
     render(){
         return(
             <div>
