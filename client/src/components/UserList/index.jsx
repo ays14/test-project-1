@@ -1,28 +1,33 @@
 import React from 'react'
-import { List, Image } from 'semantic-ui-react'
-import img1 from './avatars/1.png'
-import img2 from './avatars/2.png'
-import './style.css'
+import { List, Header } from 'semantic-ui-react'
+import userlist from '../../queries/getUserList'
+import { graphql } from 'react-apollo'
+import { Link } from 'react-router-dom'
+const ListItem = ({data, index }, props) =>{
+    
+    return(
+        <List.Item index={index} >
+           <Link to={`/m/${data.username}`}> <List.Header>{data.username}</List.Header> </Link>
+        </List.Item>
+    
+    )
+} 
 
 const UserList = function(props) {
+    if (props.data.loading){
+        return (<div> Loading </div>)
+    }
+    let userlist = props.data.userlist
     return (
-        <div className="container">
-        <List selection verticalAlign='middle'>
-            <List.Item>
-            <Image avatar src={img1} />
-            <List.Content>
-                <List.Header>Helen</List.Header>
-            </List.Content>
-            </List.Item>
-            <List.Item>
-            <Image avatar src={img2} />
-            <List.Content>
-                <List.Header>Christian</List.Header>
-            </List.Content>
-            </List.Item>
+        <div >
+        <Header> UserList </Header>
+        <List selection animated bulleted  >
+        {userlist.map((item, idx)=>(
+            <ListItem data={item} key={idx} />
+        ))}
         </List>            
         </div>
     )
 }
 
-export default UserList
+export default graphql(userlist)(UserList)

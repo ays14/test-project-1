@@ -22,7 +22,7 @@ export default class AppBar extends Component {
         <Icon name='comments outline' circular size="large" />
         </Menu.Item>
         <Menu.Item>
-        <Header> GraphQL Messenger {user}  </Header>
+        <Header> GraphQL Messenger ->> Hi '{user}'  </Header>
         </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>

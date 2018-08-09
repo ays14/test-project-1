@@ -33,20 +33,20 @@ async function getAllUsers() {
     })
 }
 
-/**
- * 
- * @param {Object} payload its req.params
- */
-async function getById(payload) {
-    const user = await User.findOne({
-        where: {id: payload.id},
-        attributes: ['id', 'firstname', 'age']
-    })
-    return new Promise((resolve,reject)=>{
-        if (user) resolve (user)
-        else reject ('no user exists')
-    })
-}
+// /**
+//  * 
+//  * @param {Object} payload its req.params
+//  */
+// async function getById(payload) {
+//     const user = await User.findOne({
+//         where: {id: payload.id},
+//         attributes: ['id', 'firstname', 'age']
+//     })
+//     return new Promise((resolve,reject)=>{
+//         if (user) resolve (user)
+//         else reject ('no user exists')
+//     })
+// }
 
 async function login(email, password) {
     console.log(email,password)
@@ -77,6 +77,5 @@ async function login(email, password) {
 module.exports = {
     create,
     getAllUsers,
-    getById,
     login
 }

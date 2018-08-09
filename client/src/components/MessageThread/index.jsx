@@ -1,18 +1,14 @@
 import React from 'react'
+import Header from '../Header'
 import UserList from '../UserList'
 import MessageBox from '../MessageBox'
 import { Grid } from 'semantic-ui-react'
-import Header from '../Header'
-import { graphql } from 'react-apollo'
-import query from '../../queries/getCurrentUser'
 
-class Home extends React.Component{
-
-    render(){
-        if ( this.props.data.loading) return <div/>
+class MessageThread extends React.Component {
+    render() {
         return(
             <div>
-            <Header user={this.props.data.getcurrentUser.username}/>
+            <Header />
             <Grid divided columns={2}>
             <Grid.Column width={13}>
                 <MessageBox/>
@@ -25,5 +21,6 @@ class Home extends React.Component{
         )
     }
 }
-export default graphql(query)(Home)
+
+export default MessageThread
 

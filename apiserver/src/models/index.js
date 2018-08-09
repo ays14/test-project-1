@@ -18,7 +18,14 @@ models.MessageRecipent = sequelize.import('./MessageRecipent')
 sequelize.sync()
 
 //Define associations
+models.Message.belongsTo(models.MessageRecipent, {
+  foreignKey: {
+    name: 'recipent_id',
+    allowNull: true
+  }
+}) // adding recipent_id foreign key to a message
 
 
 module.exports = models;
 
+ 

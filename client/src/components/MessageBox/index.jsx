@@ -5,13 +5,13 @@ import './style.css'
 const Messages = () => {
     return(
     <div>
-        <Segment floated="left">
+        <Segment floated="left" color="teal" inverted>
         <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
         </p>
         </Segment>
         <div style={{padding:'20px'}}></div>
-        <Segment floated="right" inverted color="grey">
+        <Segment floated="right" inverted color="blue">
         <p>
         "Lex ea commodo consequat. 
         Duis aute irure dolor in reprehenderit"
@@ -43,12 +43,18 @@ const Messages = () => {
 }
 
 const MessageBox = function() {
+
+    
+
     return(
         <div className="container">
                 <div className="msg-box">
                 <Messages />
                 </div>
-                <Input placeholder="messsage" fluid/>
+                
+                <form>
+                    <Input placeholder="messsage" fluid/>
+                </form> 
         </div>
     )
 }

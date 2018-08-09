@@ -3,6 +3,7 @@ import { Form, Button, Header, Icon, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './style.css'
 import { graphql } from 'react-apollo'
+import getUserList from '../../queries/getUserList'
 import signupMutation from '../../queries/signupMutation';
 class SignupForm extends React.Component {
     constructor(props){
@@ -33,7 +34,8 @@ class SignupForm extends React.Component {
         let pop = await this.props.mutate({
             variables: {
                 email, password, username, firstname, lastname
-            }
+            },
+            refetchQueries: [{query: getUserList}]
         }) 
         localStorage.setItem('token', pop.data.addUser)
         this.props.history.push('/')

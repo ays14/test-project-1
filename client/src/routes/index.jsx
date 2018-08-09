@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 import Home from '../components/Home'
-
+import MessageThread from '../components/MessageThread'
 // async function isAuthenticated(){
 //     let token
 //     token = await localStorage.getItem('token')
@@ -13,13 +13,6 @@ import Home from '../components/Home'
 //     else 
 //     return true
 // }
-
-
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route {...rest} render={ (props)=>(
-//         auth ? <Component {...props}/> : <Redirect to="/login"/>
-//     )} />
-// )
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props)=>(
@@ -33,6 +26,7 @@ const Routes = () => {
         <Router>
         <Switch>
             <PrivateRoute exact path="/" component={Home}/>
+            <PrivateRoute exact path="/m/:username" component={MessageThread}/>
             <Route exact path="/login" component={LoginForm}/>
             <Route exact path="/signup" component={SignupForm}/>
         </Switch>

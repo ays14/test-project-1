@@ -15,6 +15,17 @@ const UserType = new GraphQLObjectType({
     }) 
 })
 
+const MessageType = new GraphQLObjectType({
+    name: 'Message',
+    fields: () => ({
+        id: { type: GraphQLString }, //msgid
+        msgBody : { type: GraphQLString },
+        creatorId: { type: GraphQLString },
+        
+    })
+})
+
 module.exports = {
-    UserType
+    UserType,
+    MessageType
 }

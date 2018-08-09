@@ -2,28 +2,11 @@ const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLInt,
         GraphQLString, GraphQLNonNull } = graphql
 const { resolver } = require('graphql-sequelize')
-const { UserType } = require('./models')
-const { User } = require('../models')
+const { UserType, MessageType } = require('./models')
+const { User, Message } = require('../models')
 const { to,TE } = require('../../common/helper')
 const UserService = require('../services/UserService')
-const UserController = require('../controllers/UserController')
-
-// module.exports = () => ({
-//     addUser: {
-//         type: UserType,
-//         args: {
-//             firstname: {type: new GraphQLNonNull(GraphQLString)},
-//             age: { type: new GraphQLNonNull(GraphQLInt)}
-//         },
-//         resolve: async function(root, {firstname, age}, context, info) {
-//             console.log( root, context, info )
-//             let err, user
-//             [err, user] = await to(User.create({firstname, age}))
-//             if (err) TE('user not created')
-//             return await (resolver(User)(root, {id: user.id}, context, info))  ///how to use to helper functionality ???
-//         }
-//     }
-// })
+const MessageService = require('../services/MessageService')
 
 const RootMutation = new GraphQLObjectType({
     name: 'Mutation',
@@ -44,15 +27,6 @@ const RootMutation = new GraphQLObjectType({
                 if (err) TE('user not created')
                 let token
                 token = "Bearer " + user.tokenize()
-                // console.log(user)
-                // return await (resolver(User,{
-                //     before: ()=>{
-
-                //     },
-                //     after:()=>{
-
-                //     }
-                // }))  ///how to use to helper functionality ???
                 return token 
             }
         },
@@ -72,15 +46,33 @@ const RootMutation = new GraphQLObjectType({
 
         getCurrentUser: {
             type: UserType,
-            args:{
-                dummyArg: { type: GraphQLString}
-            },
-            resolve: async function (root, token, context){
+            resolve: async function (root,token,  context){
                 console.log(context.user)
-                console.log(token)
                 return User.findById(context.user.id)
             }
+        },
+
+        createMessage: {
+            type: MessageType,
+            args: { 
+                msgBody: { type: new GraphQLNonNull(GraphQLString) },
+                creatorId: { type: new GraphQLNonNull(GraphQLString) }
+            },
+            resolve: async (root, {msgBody, creatorId}, context) => {
+                // let err, message
+                // console.log('context' ,context.user)
+                // [err, message] = await to(MessageService.create({msgBody, creatorId}))
+                // if (err) TE('message not created')
+                // console.log(message)
+                // return message
+                let message
+                message = await MessageService.create({msgBody, creatorId})
+                console.log(message)
+                return message
+            }
         }
+
+        
     }
 })
 
