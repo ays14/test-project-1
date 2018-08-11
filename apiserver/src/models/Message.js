@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) =>
       defaultValue: DataTypes.UUIDV4 ,       
       primaryKey: true },
     msgBody : { type: DataTypes.STRING(2048), allowNull: false },
-    parentMessageId: { type: DataTypes.UUID, allowNull: true},
     creatorId: { type: DataTypes.UUID, allowNull: false },
 }
 )
