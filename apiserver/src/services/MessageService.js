@@ -1,7 +1,7 @@
 /**
  * This service provides operations to manage Messages. 
  */
-const { Message } = require('../models')
+const { Message, MessageRecipent } = require('../models')
 const { to, TE } = require('../../common/helper')
 const _ = require('lodash')
 
@@ -21,13 +21,13 @@ async function createMessage(payload) {
 }
 
 async function createRecipent(payload) {
+    console.log( payload)
     let err, recipent 
     [ err, recipent ] = await to(MessageRecipent.create({
-        id: payload.id,
-        msgId: payload.msgId,
-        creatorId: payload.creatorId
+        msgId: payload.msgId, // foreign key to message 
+        recipentId: payload.recipentId  //payload.recipentId  //foreign key to user table
     }))
-    console.log(recipent.dataValues)
+    // console.log(recipent)
     return new Promise ((resolve, reject)=>{
         if (err) reject(TE(err.message))
         else resolve(recipent)

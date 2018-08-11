@@ -56,13 +56,28 @@ const RootMutation = new GraphQLObjectType({
             type: MessageType,
             args: { 
                 msgBody: { type: new GraphQLNonNull(GraphQLString) },
-                creatorId: { type: new GraphQLNonNull(GraphQLString) }
+                creatorId: { type: new GraphQLNonNull(GraphQLString) },
+                parentMessageId: { type: GraphQLString },
+                recipentId: { type: new GraphQLNonNull(GraphQLString)}
             },
-            resolve: async (root, {msgBody, creatorId}, context) => {
+            resolve: async (root, {msgBody, creatorId, parentMessageId, recipentId}, context) => {
                 let err, message
-                [err, message] = await to(MessageService.createMessage({msgBody, creatorId, parentMessageId}))
+                [err, message] = await to(MessageService.createMessage({msgBody, creatorId}))
                 if (err) TE('message not created')
-                return message
+                let msgId = message.id
+                console.log(msgId)
+                let eror, recipent
+                [eror, recipent ] = await to(MessageService.createRecipent({msgId, recipentId}))
+                if (eror) TE('messageRecipent not created')
+                let returnObj
+                returnObj = {
+                    id: message.dataValues.id, 
+                    msgBody: message.dataValues.msgBody,
+                    creatorId: message.dataValues.creatorId,
+                    parentMessageId: message.dataValues.parentMessageId,
+                    recipentId: recipent.dataValues.recipentId
+                }
+                return returnObj
             }
         }
 

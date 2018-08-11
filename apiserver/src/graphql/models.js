@@ -21,7 +21,8 @@ const MessageType = new GraphQLObjectType({
         id: { type: GraphQLString }, //msgid
         msgBody : { type: GraphQLString },
         creatorId: { type: GraphQLString },
-        parentMessageId: { type: GraphQLString }        
+        parentMessageId: { type: GraphQLString },
+        recipentId: { type: GraphQLString }        
     })
 })
 
