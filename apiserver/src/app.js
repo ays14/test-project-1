@@ -7,6 +7,7 @@ if(!process.env.NODE_ENV) {
 }
 
 const express = require('express')
+const playground = require('gql-express-playground')
 const _ = require('lodash')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
@@ -34,6 +35,8 @@ app.use('/graphql', authMiddleware, GraphQLHttp((req)=>({
     graphiql: true
 }))
 )
+
+app.use('/playground', playground.expressPlayground({endpoint: '/graphql'}))
 
 app.use((req,res,next)=>{
     res.status(404).json({
