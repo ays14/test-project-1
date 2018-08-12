@@ -28,6 +28,7 @@ async function createRecipent(payload) {
         recipentId: payload.recipentId  //payload.recipentId  //foreign key to user table
     }))
     // console.log(recipent)
+    
     return new Promise ((resolve, reject)=>{
         if (err) reject(TE(err.message))
         else resolve(recipent)

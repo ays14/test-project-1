@@ -77,6 +77,7 @@ const RootMutation = new GraphQLObjectType({
                     parentMessageId: message.dataValues.parentMessageId,
                     recipentId: recipent.dataValues.recipentId
                 }
+                console.log(returnObj)
                 return returnObj
             }
         }
